@@ -28,3 +28,14 @@ Feedback on the first Claude Design draft (2026-09-25). The structure is right; 
 - Risk: the accent must not be confused with the "not available" status. Keep "not available" a
   distinct, brighter red and always pair it with an icon + text, never color alone.
 - Desktop-first; on mobile the order board stacks below the conversation.
+
+## Changes after the first live run (2026-09-25)
+
+- **Layout must fit any desktop screen.** The desktop app is exactly one screen: the page never scrolls,
+  only the transcript does. Columns stack only below 860px. Narrow and short screens get a tighter board.
+  Checked with headless Chrome screenshots at 1440×900, 1536×730, 1280×650 and 1000×620.
+- **No visible scrollbar** in the transcript; the top edge fades out instead.
+- **Product card shows stock once:** one number (`2 / 2`), one caption (`free` / `in stock`),
+  and a status line only when it says something (`In your request`, `Needs 2 · only 1 free`, `Fully booked`).
+  Removed the unit dots, the `2 in stock` sub-line and the default `Total in stock` status — four elements said the same thing.
+- **Voice caption** sits right under the button instead of under the wave's full canvas.

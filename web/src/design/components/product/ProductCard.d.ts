@@ -11,8 +11,6 @@ export interface ProductCardProps {
   free?: number | null;
   /** Units of this item in the current request (0 = not in request). */
   requested?: number;
-  /** Caption when dates are known, e.g. "Oct 5–7" */
-  dateLabel?: string;
   className?: string;
 }
 export declare function ProductCard(props: ProductCardProps): JSX.Element;

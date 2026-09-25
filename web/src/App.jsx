@@ -171,7 +171,6 @@ export function App() {
                   kind={p.kind}
                   total={p.total}
                   free={inventory ? freeById[p.id] : null}
-                  dateLabel={dates ?? undefined}
                   requested={request?.itemId === p.id && request.status !== 'confirmed' ? request.quantity ?? 1 : 0}
                 />
               ))}
