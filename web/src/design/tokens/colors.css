@@ -1,0 +1,36 @@
+:root{
+/* Neutral scale — faintly warm grey, like darkroom paper */
+--gray-0:#ffffff;--gray-25:#fbfbfa;--gray-50:#f6f6f4;--gray-100:#eeeeeb;--gray-150:#e6e5e2;--gray-200:#dcdbd7;--gray-300:#c6c5c0;--gray-400:#a09f9a;--gray-500:#7a7974;--gray-600:#5b5a56;--gray-700:#41403d;--gray-800:#2a2927;--gray-900:#1a1918;--gray-950:#0e0e0d;
+
+/* ACCENT — the one variable to change. Muted greyish burgundy (REC lamp / darkroom safelight). */
+--accent:#7d4550;
+--accent-strong:color-mix(in oklch,var(--accent) 82%,black);
+--accent-soft:color-mix(in oklch,var(--accent) 9%,white);
+--accent-softer:color-mix(in oklch,var(--accent) 5%,white);
+--accent-border:color-mix(in oklch,var(--accent) 32%,white);
+--accent-glow:color-mix(in oklch,var(--accent) 22%,transparent);
+--accent-fg:#ffffff;
+
+/* Semantic — only where they carry meaning. Danger is a clear, bright red, never the burgundy accent. */
+--success-bg:#edf6ef;--success-fg:#1f6b37;--success-border:#bcdcc4;--success-solid:#2e8a4b;
+--danger-bg:#fdefed;--danger-fg:#bf2318;--danger-border:#f2c0ba;--danger-solid:#d8322a;
+--warning-bg:#fcf5e4;--warning-fg:#855600;--warning-border:#ead7a2;--warning-solid:#c78908;
+--info-bg:#eef2f7;--info-fg:#2c5282;--info-border:#c5d2e3;--info-solid:#3b6aa3;
+
+/* Semantic aliases */
+--surface-page:var(--gray-25);
+--surface-panel:var(--gray-0);
+--surface-sunken:var(--gray-50);
+--surface-hover:var(--gray-100);
+--surface-inverse:var(--gray-900);
+--text-primary:var(--gray-900);
+--text-secondary:var(--gray-600);
+--text-tertiary:var(--gray-500);
+--text-faint:var(--gray-400);
+--text-inverse:var(--gray-0);
+--border-subtle:var(--gray-150);
+--border-default:var(--gray-200);
+--border-strong:var(--gray-300);
+--border-focus:var(--accent);
+--focus-ring:0 0 0 3px var(--accent-glow);
+}

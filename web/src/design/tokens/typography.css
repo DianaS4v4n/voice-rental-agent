@@ -1,0 +1,19 @@
+:root{
+--font-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+
+/* Size scale */
+--text-2xs:11px;--text-xs:12px;--text-sm:13px;--text-md:14px;--text-base:16px;--text-lg:18px;--text-xl:22px;--text-2xl:28px;--text-3xl:36px;
+
+--leading-tight:1.2;--leading-snug:1.35;--leading-normal:1.5;
+--weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+--tracking-tight:-0.015em;--tracking-normal:0;--tracking-label:0.06em;
+
+/* Roles */
+--type-transcript:var(--weight-regular) var(--text-base)/1.45 var(--font-sans);
+--type-title:var(--weight-semibold) var(--text-lg)/var(--leading-tight) var(--font-sans);
+--type-body:var(--weight-regular) var(--text-md)/var(--leading-normal) var(--font-sans);
+--type-label:var(--weight-medium) var(--text-xs)/var(--leading-tight) var(--font-sans);
+--type-eyebrow:var(--weight-semibold) var(--text-2xs)/var(--leading-tight) var(--font-sans);
+--type-data:var(--weight-medium) var(--text-md)/var(--leading-tight) var(--font-sans);
+--type-data-lg:var(--weight-medium) var(--text-2xl)/var(--leading-tight) var(--font-sans);
+}

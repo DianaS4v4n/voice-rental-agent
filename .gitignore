@@ -6,3 +6,5 @@ dist/
 *.db
 *.sqlite
 .DS_Store
+logs/
+data/
