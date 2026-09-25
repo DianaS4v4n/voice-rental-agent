@@ -62,3 +62,11 @@ body{overflow:hidden}
 /* The caption sits right under the button, not under the wave's full canvas. */
 .kit-conv__voice .vr-voice{gap:0}
 .kit-conv__voice .vr-voice__label{margin-top:-18px}
+
+/* Full-width shell: the board is pinned to the right edge, the conversation takes the rest. */
+.kit-main{max-width:none;grid-template-columns:minmax(0,1fr) clamp(440px,34vw,560px)}
+.kit-board{background:var(--surface-board);gap:var(--space-5);padding:var(--space-6);overscroll-behavior:contain}
+.kit-board .vr-product.is-selected{background:var(--accent-soft)}
+/* Board cards keep their natural height; the board scrolls only if a screen is truly too short. */
+.kit-board>*{flex-shrink:0}
+.kit-board .vr-receipt__foot{margin-top:var(--space-4);padding-top:var(--space-3);border-top:var(--border-width) solid var(--border-subtle)}

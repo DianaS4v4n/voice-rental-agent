@@ -21,6 +21,8 @@
 --surface-page:var(--gray-25);
 --surface-panel:var(--gray-0);
 --surface-sunken:var(--gray-50);
+/* Order board: a barely-there wash of the burgundy accent. */
+--surface-board:color-mix(in oklch,var(--accent) 6%,white);
 --surface-hover:var(--gray-100);
 --surface-inverse:var(--gray-900);
 --text-primary:var(--gray-900);

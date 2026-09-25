@@ -39,3 +39,9 @@ Feedback on the first Claude Design draft (2026-09-25). The structure is right; 
   and a status line only when it says something (`In your request`, `Needs 2 · only 1 free`, `Fully booked`).
   Removed the unit dots, the `2 in stock` sub-line and the default `Total in stock` status — four elements said the same thing.
 - **Voice caption** sits right under the button instead of under the wave's full canvas.
+- **Board pinned to the right edge**, conversation fills the rest of the width (no 1440px centred frame and empty side margins on wide screens).
+- **Board background** is a 6% wash of the burgundy accent (`--surface-board`) instead of warm grey; a selected product card uses the 9% tint so it still stands out.
+- **Receipt replaces the request card once booked** — both showed the same facts. The empty "Nothing booked yet" slot is gone; the request card already says it's waiting for a yes.
+- **Receipt is shorter:** rental length joins the dates line (`Oct 5–7, 2026 · 3 days`).
+- Board cards no longer shrink (they were being clipped); the board only scrolls on screens too short to fit it.
+- Dev-only `/?preview=awaiting|unavailable|booked` fixtures make every board state screenshot-checkable without a live call.

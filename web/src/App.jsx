@@ -11,6 +11,7 @@ import { Toast } from './design/components/feedback/Toast.jsx';
 import { Button } from './design/components/core/Button.jsx';
 import { useVoiceAgent, PRICE_PER_MINUTE } from './voice/useVoiceAgent.js';
 import { daysBetween, formatCreated, formatRange } from './format.js';
+import { PREVIEW } from './preview.js';
 
 const PRODUCTS = [
   { id: 'camera_a', name: 'Camera A', kind: 'camera', total: 2 },
@@ -82,7 +83,9 @@ function requestCardProps(request, checking, lastEvent, corrections) {
 }
 
 export function App() {
-  const agent = useVoiceAgent();
+  const live = useVoiceAgent();
+  // In development, /?preview=<state> replaces the live data with a fixture (see preview.js).
+  const agent = PREVIEW ? { ...live, ...PREVIEW } : live;
   const [showDb, setShowDb] = useState(false);
   const [compact, setCompact] = useState(window.innerWidth < 640);
   const [toast, setToast] = useState(null);
@@ -116,7 +119,7 @@ export function App() {
         mode: agent.lastEvent?.kind === 'already_booked' ? 'repeat' : 'new',
         animKey: agent.lastEvent?.at,
       }
-    : { empty: true };
+    : null;
 
   const dates = request ? formatRange(request.startDate, request.endDate) : null;
   const freeById = Object.fromEntries((inventory ?? []).map((row) => [row.itemId, row.free]));
@@ -157,7 +160,8 @@ export function App() {
         </section>
 
         <section className="kit-board" aria-label="Your order">
-          <RequestCard {...requestCardProps(request, agent.checking, agent.lastEvent, corrections)} />
+          {/* Once booked, the receipt takes the request card's place: both would show the same facts. */}
+          {receipt ? <BookingReceipt {...receipt} /> : <RequestCard {...requestCardProps(request, agent.checking, agent.lastEvent, corrections)} />}
           <div>
             <div className="kit-board__label">
               <span className="vr-eyebrow">Inventory</span>
@@ -176,7 +180,6 @@ export function App() {
               ))}
             </div>
           </div>
-          <BookingReceipt {...receipt} />
         </section>
       </main>
 

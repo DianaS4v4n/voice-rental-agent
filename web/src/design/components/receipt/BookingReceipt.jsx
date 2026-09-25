@@ -17,9 +17,8 @@ export function BookingReceipt({ bookingId, item, qty, dates, days, createdAt, m
       <div className="vr-receipt__rule" />
       <div className="vr-receipt__row"><span>Item</span><span>{item}</span></div>
       <div className="vr-receipt__row"><span>Qty</span><span>{qty}</span></div>
-      <div className="vr-receipt__row"><span>Dates</span><span>{dates}</span></div>
-      {days != null && <div className="vr-receipt__row"><span>Rental days</span><span>{days}</span></div>}
-      <div className="vr-receipt__rule" />
+      {/* Rental length joins the dates line instead of taking a row of its own. */}
+      <div className="vr-receipt__row"><span>Dates</span><span>{dates}{days != null && ` · ${days} ${days === 1 ? 'day' : 'days'}`}</span></div>
       <div className="vr-receipt__foot"><span>Created</span><span>{createdAt}</span></div>
       {mode === 'repeat' && (
         <div className="vr-receipt__note"><Icon name="duplicate" size={16} strokeWidth={2} /><span>Already booked as {bookingId} — no duplicate created</span></div>
