@@ -19,9 +19,7 @@ const FORWARDED = new Set([
   'ConversationText',
   'UserStartedSpeaking',
   'AgentThinking',
-  'AgentStartedSpeaking',
   'AgentAudioDone',
-  'LatencyReport',
   'Error',
   'Warning',
 ]);
@@ -55,11 +53,15 @@ export function runAgentSession(browser: WebSocket, service: BookingService, api
 
   deepgram.on('message', (data, isBinary) => {
     if (isBinary) {
+      // Agent audio. Deepgram doesn't send AgentStartedSpeaking, so audio itself marks the agent as talking.
+      gate.onAgentStartedSpeaking();
       if (browser.readyState === WebSocket.OPEN) browser.send(data, { binary: true });
       return;
     }
     const message = JSON.parse(data.toString());
-    record(message);
+    // Deepgram sends a speech-recognition-only LatencyReport every ~240 ms; keep only the informative ones.
+    const noise = message.type === 'LatencyReport' && Object.keys(message).length <= 2;
+    if (!noise) record(message);
 
     switch (message.type) {
       case 'SettingsApplied':
@@ -71,9 +73,6 @@ export function runAgentSession(browser: WebSocket, service: BookingService, api
         break;
       case 'UserStartedSpeaking':
         gate.onUserStartedSpeaking();
-        break;
-      case 'AgentStartedSpeaking':
-        gate.onAgentStartedSpeaking();
         break;
       case 'FunctionCallRequest':
         for (const call of message.functions ?? []) {

@@ -84,6 +84,11 @@ export function useVoiceAgent() {
         if (message.role === 'user') {
           addLine({ speaker: 'user', text: message.content });
           s.userSpoke = true;
+          // The user's turn is complete: the next agent audio is a new reply.
+          // (Deepgram doesn't send AgentStartedSpeaking, so this is the reliable boundary.)
+          s.dropAudio = false;
+          s.audioDone = false;
+          s.firstChunkPending = true;
           setVoice((v) => (v === 'user-speaking' || v === 'listening' ? 'thinking' : v));
         } else {
           addLine({ speaker: 'agent', text: message.content });
@@ -91,12 +96,6 @@ export function useVoiceAgent() {
         break;
       case 'AgentThinking':
         setVoice((v) => (v === 'agent-speaking' ? v : 'thinking'));
-        break;
-      case 'AgentStartedSpeaking':
-        s.dropAudio = false;
-        s.audioDone = false;
-        s.firstChunkPending = true;
-        s.deepgramLatency = message.total_latency;
         break;
       case 'AgentAudioDone':
         s.audioDone = true;
@@ -126,9 +125,8 @@ export function useVoiceAgent() {
       // Latency = end of the user's speech → first audible sample of the reply.
       if (s.userSpoke && s.lastVoiceAt) {
         const ms = Math.round(audibleAt - s.lastVoiceAt);
-        const entry = { turn: 0, ms, deepgramMs: s.deepgramLatency != null ? Math.round(s.deepgramLatency * 1000) : null };
-        setLatencies((prev) => [...prev, { ...entry, turn: prev.length + 1 }]);
-        send({ type: 'metric', latencyMs: ms, deepgramLatencyMs: entry.deepgramMs });
+        setLatencies((prev) => [...prev, { turn: prev.length + 1, ms }]);
+        send({ type: 'metric', latencyMs: ms });
       }
       s.userSpoke = false;
     }

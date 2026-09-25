@@ -31,3 +31,7 @@
 .kit-drawer{left:0}.kit-drawer .vr-drawer{width:100%}
 .kit-toast{bottom:150px}
 }
+
+/* Transcript scrolls without a visible scrollbar; the top edge fades out to show there is more above. */
+.kit-conv__feed{scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 56px);mask-image:linear-gradient(to bottom,transparent 0,#000 56px)}
+.kit-conv__feed::-webkit-scrollbar{display:none}
