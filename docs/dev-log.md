@@ -14,7 +14,7 @@ Notes for the delivery report: time spent, AI tools used, and how AI output was 
 | 2026-09-25 | Brief analysis, voice stack choice, accounts (GitHub, Deepgram), test plan with expected outcomes | ~1.5 h |
 | 2026-09-25 | Booking domain logic + unit tests | ~0.5 h |
 | 2026-09-25 | Design system in Claude Design (Diana) | ~0.9 h |
-| 2026-09-25 | Session 2 started 23:06 — voice integration | — |
+| 2026-09-25 | Voice integration (Deepgram bridge, tools, confirmation gate), first live runs, layout fixes (23:06–23:50) | ~0.75 h |
 
 ## Checking AI output
 
