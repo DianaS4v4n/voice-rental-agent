@@ -9,3 +9,4 @@ dist/
 logs/
 data/
 tests/voice/results/
+tests/voice/demo-timeline.json

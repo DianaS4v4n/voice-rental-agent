@@ -4,7 +4,7 @@ Voice equipment booking agent — Diana, Product Builder test assignment, 2026-0
 
 - **Demo:** https://voice-rental-agent.onrender.com (Render free tier: the first visit after 15 idle minutes takes up to ~50 s to wake the server)
 - **Repository:** this repo; setup in [README.md](../README.md)
-- **Video walkthrough:** _link added after recording_
+- **Video walkthrough (1:33):** [walkthrough.mp4](walkthrough.mp4) — recorded on the deployed demo. The customer voice is synthetic (Deepgram Aura), played into the real web app by [tests/voice/demo-driver.mjs](../tests/voice/demo-driver.mjs); agent, database and UI are live. Captions and the end card added with ffmpeg.
 
 ## 1. What works
 
@@ -106,7 +106,7 @@ Development usage for the whole assignment (live tries + all test runs) was a fe
 
 ## 6. Time spent
 
-See the time log in [dev-log.md](dev-log.md). Total ≈ **5.5–6 h** of focused work, including design iterations
+See the time log in [dev-log.md](dev-log.md). Total ≈ **6 h** of focused work (sum of the time log), including design iterations
 (Claude Design, Nano Banana) and all test runs.
 
 ## 7. AI tools and how their output was checked

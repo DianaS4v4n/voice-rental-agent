@@ -16,6 +16,7 @@ Notes for the delivery report: time spent, AI tools used, and how AI output was 
 | 2026-09-25 | Design system in Claude Design (Diana) | ~0.9 h |
 | 2026-09-25 | Voice integration (Deepgram bridge, tools, confirmation gate), first live runs, layout fixes (23:06–23:50) | ~0.75 h |
 | 2026-09-28 | Visual direction v2, product photos (Diana, Nano Banana), voice test runner T1–T9, speed experiments A–E, deploy config (15:07–16:15) | ~1.3 h |
+| 2026-09-28 | Delivery notes, deploy to Render, demo driver, video recording and editing, final UI fixes (16:15–17:20) | ~1.1 h |
 
 ## Checking AI output
 
