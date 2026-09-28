@@ -172,7 +172,6 @@ export function App() {
           <div className="kit-board__inventory">
             <div className="kit-board__label">
               <span className="vr-eyebrow">Inventory</span>
-              <span className="vr-eyebrow">{inventory && dates ? `on ${dates}` : 'total stock'}</span>
             </div>
             <div className="kit-board__products">
               {PRODUCTS.map((p) => (
