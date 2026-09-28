@@ -219,3 +219,12 @@
 /* Colour circles switched off to try a strictly black-and-white look
    (screenshot kept in docs/design-history/2026-09-28-product-cards-colour-circles.png). */
 .vr-product::before{display:none}
+
+/* Empty state sits centred right above the voice button: it reads as the button's instruction. */
+.kit-conv__empty{flex:1;justify-content:flex-end;align-items:center;text-align:center;max-width:440px;margin:0 auto;padding:0 0 var(--space-6)}
+.kit-conv__empty p{text-wrap:balance}
+@media (max-width:860px){
+  .kit-conv__empty{min-height:220px;padding:var(--space-8) 0 var(--space-5)}
+  /* The sticky voice bar shares the panel's white instead of drawing its own box. */
+  .kit-conv__voice{background:var(--surface-panel);border-radius:0;margin:0;box-shadow:none}
+}

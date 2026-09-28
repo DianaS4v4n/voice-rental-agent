@@ -149,7 +149,7 @@ export function App() {
           {agent.lines.length === 0 ? (
             <div className="kit-conv__empty">
               <span className="vr-eyebrow">Rent a camera, tripod or microphone</span>
-              <p>Say what you need and for which days. You can change your mind at any point — nothing is booked until you say “yes”.</p>
+              <p>Say what you need and for which days. You can change your mind at any point. Nothing is booked until you say “yes”.</p>
             </div>
           ) : (
             <Transcript lines={agent.lines} className="kit-conv__feed" />
