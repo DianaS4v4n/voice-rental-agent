@@ -11,7 +11,7 @@ Interface metaphor: a **drive-thru menu board**. You talk on the left; your orde
 Desktop-first at 1440; at ≤1080 (target 390) the board stacks under the conversation. Light theme only. All UI copy is English.
 
 ## Sources
-No codebase, Figma, logo or brand assets were provided. Everything here was authored from the written brief (in Russian) pasted into the project. Product name “Rental Desk” is a **placeholder** — replace via `AppHeader productName`.
+No codebase, Figma, logo or brand assets were provided. Everything here was authored from the written brief pasted into the project. Product name “Rental Desk” is a **placeholder** — replace via `AppHeader productName`.
 
 ## Data shown
 - **Products (3):** Camera A (2 units), Tripod B (3), Microphone C (1).

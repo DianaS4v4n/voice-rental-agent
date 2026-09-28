@@ -1,6 +1,11 @@
 # Rental Desk — voice equipment booking agent
 
-**Live demo:** https://voice-rental-agent.onrender.com (free tier — the first visit may take ~50 s to wake up).
+- **Live demo:** https://voice-rental-agent.onrender.com (free tier — the first visit may take ~50 s to wake up)
+- **Video walkthrough (1:33):** [docs/walkthrough.mp4](docs/walkthrough.mp4)
+- **Delivery notes** — test inputs with expected/actual results, failures, speed/cost measurements, time, AI tools:
+  [docs/delivery-notes.md](docs/delivery-notes.md)
+- **Recorded voice tests** (WAV of each conversation, transcripts, DB before/after):
+  [docs/evidence/voice-tests-2026-09-28/](docs/evidence/voice-tests-2026-09-28/)
 
 A browser voice agent for a small equipment rental desk. You say what you need and for which days,
 change your mind, and the agent checks the real test inventory and saves **exactly one** booking —
@@ -43,6 +48,17 @@ Each run writes to `tests/voice/results/<timestamp>/`: a WAV of the whole conver
 transcript and DB before/after, and `summary.md` with pass/fail, latency and cost.
 
 Expected outcomes were written before testing: [docs/test-plan.md](docs/test-plan.md).
+Final run: 8 of 9 pass (T9 answers during a mid-sentence pause); first agent audio after the customer stops talking:
+median 1.7 s, p90 2.4 s. Voice stack cost: $0.075 per connected minute (≈ $0.04 per booking conversation in tests).
+
+The video walkthrough was recorded with [tests/voice/demo-driver.mjs](tests/voice/demo-driver.mjs): it opens the real
+web app in Chrome and speaks the same synthetic customer voice into it in place of the microphone.
+
+## Deploy
+
+[render.yaml](render.yaml) describes a single Render web service (HTTP and WebSocket on one port).
+Set `DEEPGRAM_API_KEY` in the Render dashboard. Sessions end after `MAX_SESSION_SECONDS` (default 300)
+so a forgotten tab on a public demo doesn't keep a paid connection open.
 
 ## How it works
 
@@ -77,6 +93,7 @@ board state     ◀──────────────  runs function cal
 | Design system generated with Claude Design from our brief (`web/src/design/`) | Visual direction v2 in [web/src/theme.css](web/src/theme.css); changes to ProductCard, BookingReceipt, VoiceButton (live level), ConnectionIndicator |
 | React, Vite, `ws`, Lucide icons, Geist font | Audio capture/playback with barge-in, latency measurement, voice test runner |
 | Product photos generated with Nano Banana (Gemini) | Background removal and resizing |
+| Deepgram Aura (synthetic customer voice), ffmpeg (video captions) | Voice test runner, demo driver, test cases |
 
 Code was written with Claude Code (Claude Opus 5.5). See [docs/dev-log.md](docs/dev-log.md) for time spent,
 tools, and how AI output was checked.
@@ -86,4 +103,7 @@ tools, and how AI output was checked.
 - Tested in desktop Chrome. The layout adapts down to phone width, but voice on mobile browsers was not tested.
 - English only. Dates are assumed to be in 2026 unless said otherwise.
 - The customer's name isn't collected (not required; names are the least reliable part of speech recognition).
-- One conversation at a time; the SQLite database is shared by all visitors of a deployment.
+- One conversation at a time; the SQLite database is shared by all visitors of a deployment
+  (and resets when the free Render instance restarts).
+- A pause of ~1.5 s mid-sentence ends the turn, so the agent may answer before the customer has finished (test T9).
+  Nothing wrong is saved, and it stops talking as soon as the customer continues.
