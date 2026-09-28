@@ -1,0 +1,311 @@
+{
+  "id": "T9",
+  "title": "Mid-sentence pause",
+  "steps": [
+    {
+      "say": "I need a tripod from",
+      "pauseMs": 1500,
+      "then": "October twenty-fourth to twenty-fifth.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [],
+    "noReplyDuringPause": true,
+    "finalRequest": {
+      "itemId": "tripod_b",
+      "startDate": "2026-10-24",
+      "endDate": "2026-10-25"
+    }
+  },
+  "checks": [
+    {
+      "name": "New bookings: none",
+      "pass": true,
+      "actual": "none"
+    },
+    {
+      "name": "Agent stays silent during the mid-sentence pause",
+      "pass": false,
+      "actual": "answered in the pause: \"I'm listening.\""
+    },
+    {
+      "name": "Final request tripod_b 2026-10-24 2026-10-25",
+      "pass": true,
+      "actual": "tripod_b 2026-10-24 2026-10-25"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:15:40.471Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:16:05.795Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 3,
+      "type": "state_update"
+    },
+    {
+      "t": 890,
+      "type": "Welcome"
+    },
+    {
+      "t": 1117,
+      "type": "state_update"
+    },
+    {
+      "t": 1117,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1175,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3725,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 7566,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 10205,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "I need a tripod from"
+    },
+    {
+      "t": 10205,
+      "type": "speech_end",
+      "at": 8841.303800000023
+    },
+    {
+      "t": 10205,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "I'm listening."
+    },
+    {
+      "t": 11164,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Which tripod model, and what dates do you need it for?"
+    },
+    {
+      "t": 11255,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 11255,
+      "type": "client_interrupted_playback"
+    },
+    {
+      "t": 11255,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 13915,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "October twenty fourth to twenty fifth."
+    },
+    {
+      "t": 13915,
+      "type": "speech_end",
+      "at": 13121.303800000023
+    },
+    {
+      "t": 14294,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me check."
+    },
+    {
+      "t": 14802,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 14814,
+      "type": "state_update"
+    },
+    {
+      "t": 15346,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "One Tripod B from October 24 to 25?"
+    },
+    {
+      "t": 19139,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "One Tripod B from October twenty fourth to twenty fifth."
+    },
+    {
+      "t": 23257,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Shall I book it?"
+    },
+    {
+      "t": 23281,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1175,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 10205,
+      "role": "user",
+      "text": "I need a tripod from"
+    },
+    {
+      "t": 10205,
+      "role": "assistant",
+      "text": "I'm listening."
+    },
+    {
+      "t": 11164,
+      "role": "assistant",
+      "text": "Which tripod model, and what dates do you need it for?"
+    },
+    {
+      "t": 13915,
+      "role": "user",
+      "text": "October twenty fourth to twenty fifth."
+    },
+    {
+      "t": 14294,
+      "role": "assistant",
+      "text": "Let me check."
+    },
+    {
+      "t": 15346,
+      "role": "assistant",
+      "text": "One Tripod B from October 24 to 25?"
+    },
+    {
+      "t": 19139,
+      "role": "assistant",
+      "text": "One Tripod B from October twenty fourth to twenty fifth."
+    },
+    {
+      "t": 23257,
+      "role": "assistant",
+      "text": "Shall I book it?"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 1364
+    },
+    {
+      "turn": 2,
+      "ms": 1172
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 1384
+    },
+    {
+      "turn": 2,
+      "ms": 2453
+    }
+  ],
+  "finalRequest": {
+    "id": "f2cf3a8d-db29-4d56-82ff-88acff392e16",
+    "sessionId": "743947c2-861a-4422-ad77-2b747e9a8053",
+    "version": 2,
+    "itemId": "tripod_b",
+    "itemName": "Tripod B",
+    "quantity": 1,
+    "startDate": "2026-10-24",
+    "endDate": "2026-10-25",
+    "bookingId": null,
+    "status": "awaiting_confirmation",
+    "missing": [],
+    "freeUnits": 3
+  },
+  "durationSeconds": 25.303804399999994
+}

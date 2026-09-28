@@ -1,0 +1,212 @@
+{
+  "id": "T7",
+  "title": "Unknown item → clarification or decline",
+  "steps": [
+    {
+      "say": "I need a light stand for October eighth.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [],
+    "agentSays": "/tripod|camera|microphone/i"
+  },
+  "checks": [
+    {
+      "name": "New bookings: none",
+      "pass": true,
+      "actual": "none"
+    },
+    {
+      "name": "Agent says /tripod|camera|microphone/i",
+      "pass": true,
+      "actual": "We don't have light stands. We rent Camera A, Tripod B, and Microphone C. Would any of those work for you?"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:14:58.642Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:15:18.263Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 7,
+      "type": "state_update"
+    },
+    {
+      "t": 976,
+      "type": "Welcome"
+    },
+    {
+      "t": 1279,
+      "type": "state_update"
+    },
+    {
+      "t": 1279,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1358,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3673,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 7247,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 10674,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 11643,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "I need a light stand for October eighth."
+    },
+    {
+      "t": 11643,
+      "type": "speech_end",
+      "at": 10202.09659999999
+    },
+    {
+      "t": 11861,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "We don't have light stands."
+    },
+    {
+      "t": 13533,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "We rent Camera A, Tripod B, and Microphone C."
+    },
+    {
+      "t": 17534,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Would any of those work for you?"
+    },
+    {
+      "t": 17558,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1358,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 11643,
+      "role": "user",
+      "text": "I need a light stand for October eighth."
+    },
+    {
+      "t": 11861,
+      "role": "assistant",
+      "text": "We don't have light stands."
+    },
+    {
+      "t": 13533,
+      "role": "assistant",
+      "text": "We rent Camera A, Tripod B, and Microphone C."
+    },
+    {
+      "t": 17534,
+      "role": "assistant",
+      "text": "Would any of those work for you?"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 1657
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 1697
+    }
+  ],
+  "finalRequest": null,
+  "durationSeconds": 19.567107499999985
+}

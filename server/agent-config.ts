@@ -62,7 +62,7 @@ export const FUNCTIONS = [
 
 // Say a two-to-four word acknowledgement before a tool call, so the first audio doesn't wait for the tool
 // round-trip. Measured separately from the useful answer (see tests/voice/run.mjs).
-const FILLER = process.env.FILLER === '1';
+const FILLER = process.env.FILLER !== '0';
 
 function buildPrompt(today: string): string {
   const weekday = new Date(`${today}T00:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });

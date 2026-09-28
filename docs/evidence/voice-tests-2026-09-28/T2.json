@@ -1,0 +1,322 @@
+{
+  "id": "T2",
+  "title": "Corrected dates",
+  "steps": [
+    {
+      "say": "I need the microphone from October fourteenth to fifteenth. Actually, no, make it the sixteenth to the seventeenth.",
+      "noWait": false
+    },
+    {
+      "say": "Yes.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [
+      {
+        "itemId": "microphone_c",
+        "quantity": 1,
+        "startDate": "2026-10-16",
+        "endDate": "2026-10-17"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "New bookings: microphone_c|1|2026-10-16|2026-10-17",
+      "pass": true,
+      "actual": "microphone_c|1|2026-10-16|2026-10-17"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:12:14.337Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:12:47.075Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      },
+      {
+        "id": "BK-1001",
+        "itemId": "microphone_c",
+        "itemName": "Microphone C",
+        "quantity": 1,
+        "startDate": "2026-10-16",
+        "endDate": "2026-10-17",
+        "draftId": "9369d9dc-c216-44cb-a869-7d8cabe0c943",
+        "createdAt": "2026-09-28T14:12:39.082Z"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 4,
+      "type": "state_update"
+    },
+    {
+      "t": 975,
+      "type": "Welcome"
+    },
+    {
+      "t": 1256,
+      "type": "state_update"
+    },
+    {
+      "t": 1256,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1339,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3375,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 6532,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 11088,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 12762,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 16128,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "I need the microphone from October fourteenth to fifteenth. Actually, no. Make it the sixteenth to the seventeenth."
+    },
+    {
+      "t": 16128,
+      "type": "speech_end",
+      "at": 15001.753100000002
+    },
+    {
+      "t": 16935,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 16949,
+      "type": "state_update"
+    },
+    {
+      "t": 17015,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me check."
+    },
+    {
+      "t": 17808,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "One Microphone C from October sixteenth to seventeenth."
+    },
+    {
+      "t": 21379,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Shall I book it?"
+    },
+    {
+      "t": 21385,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 23325,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 24214,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "Yes."
+    },
+    {
+      "t": 24214,
+      "type": "speech_end",
+      "at": 23441.7531
+    },
+    {
+      "t": 24741,
+      "type": "ToolStarted",
+      "name": "confirm_booking"
+    },
+    {
+      "t": 24750,
+      "type": "state_update"
+    },
+    {
+      "t": 24750,
+      "type": "board",
+      "event": "booked",
+      "bookingId": "BK-1001"
+    },
+    {
+      "t": 25666,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Done, your booking ID is BK-1001."
+    },
+    {
+      "t": 30593,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Anything else?"
+    },
+    {
+      "t": 30602,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1339,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 16128,
+      "role": "user",
+      "text": "I need the microphone from October fourteenth to fifteenth. Actually, no. Make it the sixteenth to the seventeenth."
+    },
+    {
+      "t": 17015,
+      "role": "assistant",
+      "text": "Let me check."
+    },
+    {
+      "t": 17808,
+      "role": "assistant",
+      "text": "One Microphone C from October sixteenth to seventeenth."
+    },
+    {
+      "t": 21379,
+      "role": "assistant",
+      "text": "Shall I book it?"
+    },
+    {
+      "t": 24214,
+      "role": "user",
+      "text": "Yes."
+    },
+    {
+      "t": 25666,
+      "role": "assistant",
+      "text": "Done, your booking ID is BK-1001."
+    },
+    {
+      "t": 30593,
+      "role": "assistant",
+      "text": "Anything else?"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 2004
+    },
+    {
+      "turn": 2,
+      "ms": 2224
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 2807
+    },
+    {
+      "turn": 2,
+      "ms": 2244
+    }
+  ],
+  "finalRequest": {
+    "id": "9369d9dc-c216-44cb-a869-7d8cabe0c943",
+    "sessionId": "c956d36a-a6a7-4484-852c-b67873294f8f",
+    "version": 2,
+    "itemId": "microphone_c",
+    "itemName": "Microphone C",
+    "quantity": 1,
+    "startDate": "2026-10-16",
+    "endDate": "2026-10-17",
+    "bookingId": "BK-1001",
+    "status": "confirmed",
+    "missing": [],
+    "freeUnits": null
+  },
+  "durationSeconds": 32.712833
+}

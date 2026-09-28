@@ -1,0 +1,277 @@
+{
+  "id": "T3",
+  "title": "Insufficient stock",
+  "steps": [
+    {
+      "say": "I need two cameras for October eleventh.",
+      "noWait": false
+    },
+    {
+      "say": "No thanks, that's all.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [],
+    "agentSays": "/\\b(one|1)\\b/i"
+  },
+  "checks": [
+    {
+      "name": "New bookings: none",
+      "pass": true,
+      "actual": "none"
+    },
+    {
+      "name": "Agent says /\\b(one|1)\\b/i",
+      "pass": true,
+      "actual": "Let me check. I'm sorry, we only have one Camera A free on October eleventh. Would you like to rent just one camera, or would different dates work better for yo"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:12:47.104Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:13:13.911Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 3,
+      "type": "state_update"
+    },
+    {
+      "t": 917,
+      "type": "Welcome"
+    },
+    {
+      "t": 1199,
+      "type": "state_update"
+    },
+    {
+      "t": 1199,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1271,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3542,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 6956,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 10427,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "I need two cameras for October eleventh."
+    },
+    {
+      "t": 10427,
+      "type": "speech_end",
+      "at": 9241.647899999996
+    },
+    {
+      "t": 10624,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 10636,
+      "type": "state_update"
+    },
+    {
+      "t": 10646,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me check."
+    },
+    {
+      "t": 11664,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "I'm sorry, we only have one Camera A free on October eleventh."
+    },
+    {
+      "t": 16065,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Would you like to rent just one camera, or would different dates work better for you?"
+    },
+    {
+      "t": 16304,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 20947,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 23708,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "No. Thanks. That's all."
+    },
+    {
+      "t": 23708,
+      "type": "speech_end",
+      "at": 22521.647899999996
+    },
+    {
+      "t": 23708,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "No problem, thanks for stopping by!"
+    },
+    {
+      "t": 24714,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1271,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 10427,
+      "role": "user",
+      "text": "I need two cameras for October eleventh."
+    },
+    {
+      "t": 10646,
+      "role": "assistant",
+      "text": "Let me check."
+    },
+    {
+      "t": 11664,
+      "role": "assistant",
+      "text": "I'm sorry, we only have one Camera A free on October eleventh."
+    },
+    {
+      "t": 16065,
+      "role": "assistant",
+      "text": "Would you like to rent just one camera, or would different dates work better for you?"
+    },
+    {
+      "t": 23708,
+      "role": "user",
+      "text": "No. Thanks. That's all."
+    },
+    {
+      "t": 23708,
+      "role": "assistant",
+      "text": "No problem, thanks for stopping by!"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 1401
+    },
+    {
+      "turn": 2,
+      "ms": 1186
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 2462
+    },
+    {
+      "turn": 2,
+      "ms": 1306
+    }
+  ],
+  "finalRequest": {
+    "id": "a5a17de4-c475-4937-a99b-ae42873deecf",
+    "sessionId": "90a88384-93c9-417c-ba08-4ff8de33e1e8",
+    "version": 2,
+    "itemId": "camera_a",
+    "itemName": "Camera A",
+    "quantity": 2,
+    "startDate": "2026-10-11",
+    "endDate": "2026-10-11",
+    "bookingId": null,
+    "status": "unavailable",
+    "missing": [],
+    "freeUnits": 1
+  },
+  "durationSeconds": 26.799020400000007
+}

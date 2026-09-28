@@ -235,7 +235,7 @@ async function runCase(testCase) {
   const after = await (await fetch(`${APP_URL}/api/state`)).json();
   const useful = usefulAnswers(events, agentAudio);
 
-  return { before, after, events, transcript, latencies, userAudio, agentAudio, finalRequest: lastState?.request ?? null, durationSeconds };
+  return { before, after, events, transcript, latencies, useful, userAudio, agentAudio, finalRequest: lastState?.request ?? null, durationSeconds };
 }
 
 // A `say` followed by an `interrupt` must not wait for the agent's reply to finish:
@@ -245,17 +245,16 @@ function prepare(testCase) {
   return { ...testCase, steps };
 }
 
-// Useful answer per turn: end of the customer's speech → first agent audio that arrives after the
-// agent's first text following the turn's last tool result (or its first text if no tool ran).
-// A 'let me check' filler therefore counts for first-audio latency but not for the useful answer.
+// Useful answer per turn: end of the customer's speech → playback start of the agent's first line
+// that isn't a short acknowledgement. A 'let me check' filler counts for first-audio latency, not here.
+const FILLER_TEXT = /^(let me (check|update|look)[^.?!]*|one moment|just a (moment|second)|sure|okay|got it)[.!]?$/i;
 function usefulAnswers(events, agentAudio) {
   const ends = events.filter((e) => e.type === 'speech_end');
   return ends.map((end, i) => {
     const from = end.t;
     const to = ends[i + 1]?.t ?? Infinity;
     const inTurn = events.filter((e) => e.t >= from && e.t < to);
-    const lastTool = inTurn.filter((e) => e.type === 'state_update').at(-1);
-    const text = inTurn.find((e) => e.type === 'ConversationText' && e.role === 'assistant' && (!lastTool || e.t >= lastTool.t));
+    const text = inTurn.find((e) => e.type === 'ConversationText' && e.role === 'assistant' && !FILLER_TEXT.test(e.content.trim()));
     const audio = text && agentAudio.find((a) => a.recvAt >= text.t && a.recvAt < to);
     return audio ? { turn: i + 1, ms: Math.round(audio.at - end.at) } : null;
   }).filter(Boolean);

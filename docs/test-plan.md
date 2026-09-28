@@ -95,3 +95,17 @@ Continue T1 after the booking is confirmed. **Say:** "Yes, confirm." → "Yes, y
   Reported as median and worst case, with the number of turns.
 - **Cost:** minutes of session × published price per minute of the voice stack, plus any separate LLM/TTS
   charges. Hosting reported separately. Free credits are not counted as zero cost.
+
+---
+
+## Actual results (added 2026-09-28, after testing; expectations above unchanged)
+
+Final run with the submitted configuration: **8 of 9 pass**. Full table with the agent's actual replies:
+[delivery-notes.md §2](delivery-notes.md#2-test-set-inputs-expected-and-actual-results).
+Recordings, transcripts and DB before/after: [evidence/voice-tests-2026-09-28/](evidence/voice-tests-2026-09-28/).
+
+- T1–T8: pass.
+- **T9: partial fail** — the final request is correct and nothing is saved, but the agent answers during the 1.5 s
+  mid-sentence pause ("I'm listening."). Speech recognition ends the turn at the pause; see delivery notes §3.
+- Latency (first agent audio after the end of speech): median 1657 ms, p90 2391 ms over 19 turns;
+  useful answer: median 2287 ms, p90 3837 ms.

@@ -1,0 +1,392 @@
+{
+  "id": "T4",
+  "title": "Interruption during read-back",
+  "steps": [
+    {
+      "say": "Two tripods from October twentieth to twenty-second.",
+      "noWait": true
+    },
+    {
+      "interrupt": "Wait, make it three tripods.",
+      "afterMs": 1500,
+      "noWait": false
+    },
+    {
+      "say": "Yes.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [
+      {
+        "itemId": "tripod_b",
+        "quantity": 3,
+        "startDate": "2026-10-20",
+        "endDate": "2026-10-22"
+      }
+    ],
+    "interrupted": true
+  },
+  "checks": [
+    {
+      "name": "New bookings: tripod_b|3|2026-10-20|2026-10-22",
+      "pass": true,
+      "actual": "tripod_b|3|2026-10-20|2026-10-22"
+    },
+    {
+      "name": "Agent was interrupted and stopped talking",
+      "pass": true,
+      "actual": "playback cut on barge-in"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:13:13.948Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:13:48.763Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      },
+      {
+        "id": "BK-1001",
+        "itemId": "tripod_b",
+        "itemName": "Tripod B",
+        "quantity": 3,
+        "startDate": "2026-10-20",
+        "endDate": "2026-10-22",
+        "draftId": "81e5b750-3442-48b9-9ee4-1991407eacb4",
+        "createdAt": "2026-09-28T14:13:40.825Z"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 4,
+      "type": "state_update"
+    },
+    {
+      "t": 813,
+      "type": "Welcome"
+    },
+    {
+      "t": 1061,
+      "type": "state_update"
+    },
+    {
+      "t": 1061,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1114,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3435,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 7035,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 11796,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "Two tripods from October twentieth to twenty second."
+    },
+    {
+      "t": 11796,
+      "type": "speech_end",
+      "at": 10481.3419
+    },
+    {
+      "t": 12235,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 12248,
+      "type": "state_update"
+    },
+    {
+      "t": 12263,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me check."
+    },
+    {
+      "t": 13274,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Two Tripod B from October twentieth to twenty-second."
+    },
+    {
+      "t": 14394,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 14395,
+      "type": "client_interrupted_playback"
+    },
+    {
+      "t": 14395,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 17595,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "Wait. Make it three tripods."
+    },
+    {
+      "t": 17595,
+      "type": "speech_end",
+      "at": 16601.3419
+    },
+    {
+      "t": 17923,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 17930,
+      "type": "state_update"
+    },
+    {
+      "t": 17958,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me update that."
+    },
+    {
+      "t": 19290,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Three Tripod B from October twentieth to twenty-second."
+    },
+    {
+      "t": 23452,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Shall I book it?"
+    },
+    {
+      "t": 23457,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 25518,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 26316,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "Yes."
+    },
+    {
+      "t": 26316,
+      "type": "speech_end",
+      "at": 25561.3419
+    },
+    {
+      "t": 26876,
+      "type": "ToolStarted",
+      "name": "confirm_booking"
+    },
+    {
+      "t": 26887,
+      "type": "state_update"
+    },
+    {
+      "t": 26887,
+      "type": "board",
+      "event": "booked",
+      "bookingId": "BK-1001"
+    },
+    {
+      "t": 27749,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Perfect, your booking ID is BK-1001."
+    },
+    {
+      "t": 32702,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Anything else?"
+    },
+    {
+      "t": 32706,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1114,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 11796,
+      "role": "user",
+      "text": "Two tripods from October twentieth to twenty second."
+    },
+    {
+      "t": 12263,
+      "role": "assistant",
+      "text": "Let me check."
+    },
+    {
+      "t": 13274,
+      "role": "assistant",
+      "text": "Two Tripod B from October twentieth to twenty-second."
+    },
+    {
+      "t": 17595,
+      "role": "user",
+      "text": "Wait. Make it three tripods."
+    },
+    {
+      "t": 17958,
+      "role": "assistant",
+      "text": "Let me update that."
+    },
+    {
+      "t": 19290,
+      "role": "assistant",
+      "text": "Three Tripod B from October twentieth to twenty-second."
+    },
+    {
+      "t": 23452,
+      "role": "assistant",
+      "text": "Shall I book it?"
+    },
+    {
+      "t": 26316,
+      "role": "user",
+      "text": "Yes."
+    },
+    {
+      "t": 27749,
+      "role": "assistant",
+      "text": "Perfect, your booking ID is BK-1001."
+    },
+    {
+      "t": 32702,
+      "role": "assistant",
+      "text": "Anything else?"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 1781
+    },
+    {
+      "turn": 2,
+      "ms": 1357
+    },
+    {
+      "turn": 3,
+      "ms": 2169
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 2793
+    },
+    {
+      "turn": 2,
+      "ms": 2697
+    },
+    {
+      "turn": 3,
+      "ms": 2249
+    }
+  ],
+  "finalRequest": {
+    "id": "81e5b750-3442-48b9-9ee4-1991407eacb4",
+    "sessionId": "6a8c2b62-2a81-44a5-94a5-47ea75b78c1a",
+    "version": 3,
+    "itemId": "tripod_b",
+    "itemName": "Tripod B",
+    "quantity": 3,
+    "startDate": "2026-10-20",
+    "endDate": "2026-10-22",
+    "bookingId": "BK-1001",
+    "status": "confirmed",
+    "missing": [],
+    "freeUnits": null
+  },
+  "durationSeconds": 34.79575769999999
+}

@@ -1,0 +1,197 @@
+{
+  "id": "T6",
+  "title": "Ambiguous date → clarification",
+  "steps": [
+    {
+      "say": "Can I get the microphone from the tenth?",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": [],
+    "agentAsks": true
+  },
+  "checks": [
+    {
+      "name": "New bookings: none",
+      "pass": true,
+      "actual": "none"
+    },
+    {
+      "name": "Agent asks a clarifying question",
+      "pass": true,
+      "actual": "Let me clarify the dates. Do you mean Microphone C from October tenth, and when would you return it—the same day, or a later date?"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:14:39.811Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:14:58.621Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 3,
+      "type": "state_update"
+    },
+    {
+      "t": 1043,
+      "type": "Welcome"
+    },
+    {
+      "t": 1304,
+      "type": "state_update"
+    },
+    {
+      "t": 1304,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1361,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3789,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 7782,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 9427,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "Can I get the microphone from the tenth?"
+    },
+    {
+      "t": 9427,
+      "type": "speech_end",
+      "at": 9081.227400000003
+    },
+    {
+      "t": 10645,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me clarify the dates."
+    },
+    {
+      "t": 12218,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Do you mean Microphone C from October tenth, and when would you return it—the same day, or a later date?"
+    },
+    {
+      "t": 14100,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1361,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 9427,
+      "role": "user",
+      "text": "Can I get the microphone from the tenth?"
+    },
+    {
+      "t": 10645,
+      "role": "assistant",
+      "text": "Let me clarify the dates."
+    },
+    {
+      "t": 12219,
+      "role": "assistant",
+      "text": "Do you mean Microphone C from October tenth, and when would you return it—the same day, or a later date?"
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 1564
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 1564
+    }
+  ],
+  "finalRequest": null,
+  "durationSeconds": 18.758923899999996
+}

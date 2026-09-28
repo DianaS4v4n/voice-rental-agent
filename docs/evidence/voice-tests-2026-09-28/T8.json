@@ -1,0 +1,271 @@
+{
+  "id": "T8",
+  "title": "No explicit confirmation",
+  "steps": [
+    {
+      "say": "One camera for October twentieth.",
+      "noWait": false
+    },
+    {
+      "say": "Hmm, let me think about it.",
+      "noWait": false
+    }
+  ],
+  "expect": {
+    "newBookings": []
+  },
+  "checks": [
+    {
+      "name": "New bookings: none",
+      "pass": true,
+      "actual": "none"
+    }
+  ],
+  "before": {
+    "takenAt": "2026-09-28T14:15:18.284Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "after": {
+    "takenAt": "2026-09-28T14:15:40.453Z",
+    "inventory": [
+      {
+        "itemId": "camera_a",
+        "name": "Camera A",
+        "total": 2,
+        "booked": 0,
+        "free": 2
+      },
+      {
+        "itemId": "tripod_b",
+        "name": "Tripod B",
+        "total": 3,
+        "booked": 0,
+        "free": 3
+      },
+      {
+        "itemId": "microphone_c",
+        "name": "Microphone C",
+        "total": 1,
+        "booked": 0,
+        "free": 1
+      }
+    ],
+    "bookings": [
+      {
+        "id": "BK-1000",
+        "itemId": "camera_a",
+        "itemName": "Camera A",
+        "quantity": 1,
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-12",
+        "draftId": null,
+        "createdAt": "seed"
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 3,
+      "type": "state_update"
+    },
+    {
+      "t": 972,
+      "type": "Welcome"
+    },
+    {
+      "t": 1292,
+      "type": "state_update"
+    },
+    {
+      "t": 1292,
+      "type": "SettingsApplied"
+    },
+    {
+      "t": 1352,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 3691,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 7508,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 10588,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "One camera for October twentieth."
+    },
+    {
+      "t": 10588,
+      "type": "speech_end",
+      "at": 9081.399799999985
+    },
+    {
+      "t": 11149,
+      "type": "ToolStarted",
+      "name": "update_request"
+    },
+    {
+      "t": 11164,
+      "type": "state_update"
+    },
+    {
+      "t": 11213,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Let me check."
+    },
+    {
+      "t": 12016,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "One Camera A for October twentieth."
+    },
+    {
+      "t": 14503,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "Shall I book it?"
+    },
+    {
+      "t": 14516,
+      "type": "AgentAudioDone"
+    },
+    {
+      "t": 17527,
+      "type": "UserStartedSpeaking"
+    },
+    {
+      "t": 19347,
+      "type": "ConversationText",
+      "role": "user",
+      "content": "let me think about it."
+    },
+    {
+      "t": 19347,
+      "type": "speech_end",
+      "at": 17961.399799999985
+    },
+    {
+      "t": 19347,
+      "type": "ConversationText",
+      "role": "assistant",
+      "content": "No problem, take your time."
+    },
+    {
+      "t": 19778,
+      "type": "AgentAudioDone"
+    }
+  ],
+  "transcript": [
+    {
+      "t": 1352,
+      "role": "assistant",
+      "text": "Hi, this is the rental desk. What would you like to rent, and for which days?"
+    },
+    {
+      "t": 10588,
+      "role": "user",
+      "text": "One camera for October twentieth."
+    },
+    {
+      "t": 11213,
+      "role": "assistant",
+      "text": "Let me check."
+    },
+    {
+      "t": 12016,
+      "role": "assistant",
+      "text": "One Camera A for October twentieth."
+    },
+    {
+      "t": 14503,
+      "role": "assistant",
+      "text": "Shall I book it?"
+    },
+    {
+      "t": 19347,
+      "role": "user",
+      "text": "let me think about it."
+    },
+    {
+      "t": 19347,
+      "role": "assistant",
+      "text": "No problem, take your time."
+    }
+  ],
+  "latencies": [
+    {
+      "turn": 1,
+      "ms": 2104
+    },
+    {
+      "turn": 2,
+      "ms": 1385
+    }
+  ],
+  "useful": [
+    {
+      "turn": 1,
+      "ms": 2935
+    },
+    {
+      "turn": 2,
+      "ms": 1525
+    }
+  ],
+  "finalRequest": {
+    "id": "bcebc26b-7435-4543-8126-e1e3b69f5fc9",
+    "sessionId": "f5d54fc3-311f-4951-bfea-7f137008b204",
+    "version": 2,
+    "itemId": "camera_a",
+    "itemName": "Camera A",
+    "quantity": 1,
+    "startDate": "2026-10-20",
+    "endDate": "2026-10-20",
+    "bookingId": null,
+    "status": "awaiting_confirmation",
+    "missing": [],
+    "freeUnits": 2
+  },
+  "durationSeconds": 22.130246799999995
+}
