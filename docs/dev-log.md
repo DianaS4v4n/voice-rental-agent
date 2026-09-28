@@ -39,3 +39,8 @@ all 13 passed again.
 - **No customer name** is collected: the brief doesn't need it, and names are the least reliable part of
   speech recognition. Bookings are identified by ID.
 - **Storage:** SQLite built into Node 24 (`node:sqlite`) — no native dependencies to install.
+
+## Known issues
+
+- **Second conversation in the same page load doesn't update the UI** (found by Diana, 2026-09-28): after stopping and
+  starting again, the agent talks but the transcript and board stop updating. To investigate; workaround: reload the page.

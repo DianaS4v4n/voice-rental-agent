@@ -148,3 +148,17 @@
 .vr-product{position:relative}
 .vr-product__status{position:absolute;top:calc(var(--space-3) + 10px);left:calc(var(--space-3) + 10px);padding:5px 10px;border-radius:999px;background:var(--surface-panel);box-shadow:0 1px 3px rgba(17,17,19,.12)}
 .vr-product__status.is-danger{color:var(--danger-fg)}
+
+/* Product cards v3: real photos on a coloured circle (like the car-card reference), larger text. */
+.vr-product--camera{--tint:color-mix(in oklch,var(--accent) 24%,white)}
+.vr-product--tripod{--tint:#e9e1d3}
+.vr-product--microphone{--tint:#dde2ea}
+.vr-product__media{position:relative;background:transparent;isolation:isolate;container-type:size}
+.vr-product__media::before{content:"";position:absolute;z-index:-1;width:min(82cqw,82cqh,320px);aspect-ratio:1;border-radius:50%;background:var(--tint);top:50%;left:50%;transform:translate(-50%,-50%)}
+.vr-product__media img{width:92%;height:92%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(17,17,19,.12))}
+.vr-product.is-selected .vr-product__media{background:transparent}
+.vr-product__name{font-size:var(--text-lg);letter-spacing:-.01em}
+.vr-product__sub{font-size:var(--text-md);color:var(--text-secondary)}
+.vr-product__free{font-size:32px}
+.vr-product__of{font-size:var(--text-md)}
+.vr-product__info{padding:0 var(--space-2) var(--space-2)}

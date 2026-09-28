@@ -14,12 +14,12 @@ export function ProductCard({ name, kind = 'camera', image, total, free, request
   const soldOut = hasDates && free === 0;
 
   let status = null;
-  if (short) status = { tone: 'danger', icon: 'x-circle', text: `Needs ${requested} · only ${free} free` };
+  if (short) status = { tone: 'danger', icon: 'x-circle', text: `Needs ${requested} · only ${free} available` };
   else if (inRequest && hasDates) status = { tone: 'success', icon: 'check-circle', text: 'In your request' };
   else if (inRequest) status = { tone: 'accent', icon: 'chevron-right', text: 'In request · pick dates' };
   else if (soldOut) status = { tone: 'danger', icon: 'x-circle', text: 'Fully booked' };
 
-  const cls = ['vr-card', 'vr-product', inRequest && !short && 'is-selected', short && 'is-short', soldOut && 'is-soldout', className].filter(Boolean).join(' ');
+  const cls = ['vr-card', 'vr-product', `vr-product--${kind}`, inRequest && !short && 'is-selected', short && 'is-short', soldOut && 'is-soldout', className].filter(Boolean).join(' ');
   return (
     <article className={cls} aria-label={name}>
       <div className="vr-product__media">
@@ -32,9 +32,9 @@ export function ProductCard({ name, kind = 'camera', image, total, free, request
       <div className="vr-product__info">
         <div className="vr-product__text">
           <span className="vr-product__name">{name}</span>
-          <span className="vr-product__sub">{hasDates ? 'free' : 'in stock'}</span>
+          <span className="vr-product__sub">{hasDates ? 'available' : 'in stock'}</span>
         </div>
-        <div className="vr-product__count" aria-label={`${avail} of ${total} ${hasDates ? 'free' : 'in stock'}`}>
+        <div className="vr-product__count" aria-label={`${avail} of ${total} ${hasDates ? 'available' : 'in stock'}`}>
           <span key={avail} className="vr-product__free">{avail}</span>
           <span className="vr-product__of">/ {total}</span>
         </div>

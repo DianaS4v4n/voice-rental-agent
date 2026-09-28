@@ -57,7 +57,7 @@ function requestCardProps(request, checking, lastEvent, corrections) {
   let note;
   let noteTone;
   if (request.status === 'unavailable') {
-    note = `Only ${Math.max(request.freeUnits, 0)} of ${request.quantity} ${request.itemName} free on ${dates}`;
+    note = `Only ${Math.max(request.freeUnits, 0)} of ${request.quantity} ${request.itemName} available on ${dates}`;
   } else if (request.status === 'awaiting_confirmation') {
     note = 'Waiting for your “yes”';
   } else if (request.status === 'confirmed') {
