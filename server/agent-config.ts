@@ -97,6 +97,9 @@ export function buildSettings(today: string) {
           model: 'flux-general-en',
           version: 'v2',
           keyterms: ['Camera A', 'Tripod B', 'Microphone C', 'tripod', 'microphone'],
+          // End-of-turn tuning (Flux). Unset = Deepgram defaults. Used for the speed/quality experiments.
+          ...(process.env.EOT_THRESHOLD ? { eot_threshold: Number(process.env.EOT_THRESHOLD) } : {}),
+          ...(process.env.EAGER_EOT_THRESHOLD ? { eager_eot_threshold: Number(process.env.EAGER_EOT_THRESHOLD) } : {}),
         },
       },
       think: {
