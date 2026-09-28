@@ -207,3 +207,15 @@
 .vr-product.is-short::after{box-shadow:inset 0 0 0 2px var(--danger-solid)}
 /* Third grid column holds the (hidden) "Changed" mark, so it no longer wraps into an extra row. */
 .vr-field{grid-template-columns:72px minmax(0,1fr) auto}
+
+/* Request card v3: rows are equal bands between dividers, text centred in each band;
+   the note has the same 20px above and below. (A leftover 12px gap between rows made the spacing uneven.) */
+.vr-request{padding:var(--space-6) var(--space-6) 20px}
+.vr-request__head{margin-bottom:var(--space-4)}
+.vr-request__rows{gap:0}
+.vr-field:first-child{border-top:var(--border-width) solid var(--border-subtle)}
+.vr-request__note{padding-top:20px}
+
+/* Colour circles switched off to try a strictly black-and-white look
+   (screenshot kept in docs/design-history/2026-09-28-product-cards-colour-circles.png). */
+.vr-product::before{display:none}
