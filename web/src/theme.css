@@ -184,3 +184,26 @@
   .kit-board__top{height:248px}
   .vr-receipt__id{font-size:var(--text-2xl)}
 }
+
+/* Product cards v5: big corner circle, larger photo, selection/danger outline drawn above everything. */
+.vr-product::before{width:100%;top:0;right:0;transform:translate(38%,-38%)}
+.vr-product__media img{width:90%;height:90%}
+.vr-product.is-selected,.vr-product.is-short{box-shadow:none;outline:2px solid var(--ink);outline-offset:-2px}
+.vr-product.is-short{outline-color:var(--danger-solid)}
+
+/* Request card v2: rows stacked and stretched over the card's fixed height, big values,
+   so the card is evenly filled (and rhymes with the booking card's rows). */
+.vr-request__rows{display:flex;flex-direction:column;flex:1;min-height:0}
+.vr-field{flex:1;display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:var(--space-4);padding:0;margin:0;border-top:var(--border-width) solid var(--border-subtle);border-radius:0}
+.vr-field:first-child{border-top:none}
+.vr-field__value,.vr-field__value.is-mono{flex-direction:row;align-items:baseline;gap:var(--space-3);font-size:var(--text-xl)}
+.vr-field.is-changed{background:transparent}
+.vr-field.is-changed .vr-field__new{color:var(--ink)}
+.vr-request__head{margin-bottom:var(--space-3)}
+.vr-request__note{margin-top:0;padding-top:var(--space-3);border-top:var(--border-width) solid var(--border-subtle)}
+/* Outline as the top layer of the card (an outline on the card itself is painted under the circle). */
+.vr-product.is-selected,.vr-product.is-short{outline:none}
+.vr-product.is-selected::after,.vr-product.is-short::after{content:"";position:absolute;inset:0;z-index:3;border-radius:inherit;box-shadow:inset 0 0 0 2px var(--ink);pointer-events:none}
+.vr-product.is-short::after{box-shadow:inset 0 0 0 2px var(--danger-solid)}
+/* Third grid column holds the (hidden) "Changed" mark, so it no longer wraps into an extra row. */
+.vr-field{grid-template-columns:72px minmax(0,1fr) auto}
