@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TEXT = { connected: 'Connected', connecting: 'Connecting…', offline: 'Offline' };
+const TEXT = { ready: 'Ready', connected: 'Connected', connecting: 'Connecting…', offline: 'Offline' };
 
 export function ConnectionIndicator({ status = 'connected', label }) {
   return (

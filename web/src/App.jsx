@@ -14,9 +14,9 @@ import { daysBetween, formatCreated, formatRange } from './format.js';
 import { PREVIEW } from './preview.js';
 
 const PRODUCTS = [
-  { id: 'camera_a', name: 'Camera A', kind: 'camera', total: 2 },
-  { id: 'tripod_b', name: 'Tripod B', kind: 'tripod', total: 3 },
-  { id: 'microphone_c', name: 'Microphone C', kind: 'microphone', total: 1 },
+  { id: 'camera_a', name: 'Camera A', kind: 'camera', total: 2, image: '/products/camera-a.png' },
+  { id: 'tripod_b', name: 'Tripod B', kind: 'tripod', total: 3, image: '/products/tripod-b.png' },
+  { id: 'microphone_c', name: 'Microphone C', kind: 'microphone', total: 1, image: '/products/microphone-c.png' },
 ];
 
 const STATUS = { collecting: 'collecting', unavailable: 'unavailable', awaiting_confirmation: 'awaiting', confirmed: 'confirmed' };
@@ -129,7 +129,7 @@ export function App() {
     ? booked.before.map((row, i) => ({ item: row.name, before: row.free, after: booked.after[i].free }))
     : [];
 
-  const connection = agent.voice === 'connecting' ? 'connecting' : agent.voice === 'idle' || agent.voice === 'error' || agent.voice === 'mic-blocked' ? 'offline' : 'connected';
+  const connection = agent.voice === 'connecting' ? 'connecting' : agent.voice === 'idle' ? 'ready' : agent.voice === 'error' || agent.voice === 'mic-blocked' ? 'offline' : 'connected';
 
   return (
     <div className="kit-app">
@@ -160,9 +160,16 @@ export function App() {
         </section>
 
         <section className="kit-board" aria-label="Your order">
-          {/* Once booked, the receipt takes the request card's place: both would show the same facts. */}
-          {receipt ? <BookingReceipt {...receipt} /> : <RequestCard {...requestCardProps(request, agent.checking, agent.lastEvent, corrections)} />}
-          <div>
+          <div className="kit-board__top">
+            {/* After a booking the request card clears for the next request; the receipt holds the result. */}
+            {request?.status === 'confirmed' ? (
+              <RequestCard title="Next request" status="collecting" note="Anything else? Say what you need next." noteTone="neutral" />
+            ) : (
+              <RequestCard {...requestCardProps(request, agent.checking, agent.lastEvent, corrections)} />
+            )}
+            <BookingReceipt {...(receipt ?? { empty: true })} />
+          </div>
+          <div className="kit-board__inventory">
             <div className="kit-board__label">
               <span className="vr-eyebrow">Inventory</span>
               <span className="vr-eyebrow">{inventory && dates ? `on ${dates}` : 'total stock'}</span>
@@ -173,6 +180,7 @@ export function App() {
                   key={p.id}
                   name={p.name}
                   kind={p.kind}
+                  image={p.image}
                   total={p.total}
                   free={inventory ? freeById[p.id] : null}
                   requested={request?.itemId === p.id && request.status !== 'confirmed' ? request.quantity ?? 1 : 0}

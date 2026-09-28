@@ -1,0 +1,150 @@
+/* Visual direction v2 (2026-09-28): light neutral page, white borderless cards, black as the
+   primary accent, one dark card for the booking. Burgundy stays for small "live / yours" details.
+   Overrides the Claude Design system tokens and components; loaded last. */
+
+:root{
+  /* Neutral greys (the original scale was warm). */
+  --gray-25:#fafafa;--gray-50:#f4f4f5;--gray-100:#ececee;--gray-150:#e4e4e7;--gray-200:#d9d9dc;
+  --gray-300:#c4c4c8;--gray-400:#a1a1a6;--gray-500:#737378;--gray-600:#56565b;--gray-700:#3f3f43;
+  --gray-800:#27272a;--gray-900:#18181b;--gray-950:#0b0b0c;
+
+  --ink:#111113;
+  --ink-soft:#1d1d20;
+  --on-ink:#ffffff;
+  --on-ink-muted:#9d9da3;
+  --on-ink-rule:rgba(255,255,255,.14);
+
+  --surface-page:#ececee;
+  --surface-panel:#ffffff;
+  --surface-media:#f4f4f5;
+  --radius-card:22px;
+  --radius-media:16px;
+  --gap:16px;
+}
+
+/* ---------- Shell ---------- */
+.kit-app{background:var(--surface-page)}
+.vr-header{background:transparent;border-bottom:none;padding:0 calc(var(--gap) + 8px)}
+.vr-header__name{font-size:var(--text-lg);font-weight:var(--weight-bold)}
+
+.kit-main{gap:var(--gap);padding:0 var(--gap) var(--gap)}
+
+/* Conversation: one white panel. */
+.kit-conv{background:var(--surface-panel);border-radius:var(--radius-card);padding:var(--space-7) var(--space-7) var(--space-4)}
+.kit-conv__voice{border-top:none;padding-top:0}
+.kit-conv__empty .vr-eyebrow{color:var(--text-primary)}
+.kit-conv__empty p{font-size:var(--text-lg);line-height:1.45;color:var(--text-secondary)}
+
+/* Transcript: agent in ink, user in grey on the right. */
+.vr-line__text{color:var(--ink)}
+.vr-line--user .vr-line__text{color:var(--text-tertiary)}
+
+/* Voice button: black disc; the wave around it is a soft ink halo. */
+.vr-voice__btn{background:var(--ink);color:var(--on-ink);box-shadow:0 8px 24px rgba(17,17,19,.22)}
+.vr-voice__btn:hover{background:var(--gray-800)}
+.vr-voice__wave path{fill:var(--ink)}
+.vr-voice__btn:focus-visible{box-shadow:0 0 0 4px var(--surface-panel),0 0 0 6px var(--ink)}
+
+/* ---------- Cards ---------- */
+.vr-card{border:none;border-radius:var(--radius-card)}
+.vr-eyebrow{color:var(--text-tertiary)}
+
+/* Board: no background of its own; cards sit on the page like dashboard widgets. */
+.kit-board{background:transparent;border:none;padding:0}
+.kit-board__top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:var(--gap)}
+.kit-board__inventory{display:flex;flex-direction:column}
+.kit-board__label{margin:var(--space-1) var(--space-2) var(--space-3)}
+.kit-board__products{gap:var(--gap)}
+
+/* Request card: three big values side by side instead of table rows. */
+.vr-request{padding:var(--space-6);display:flex;flex-direction:column}
+.vr-request__head{margin-bottom:var(--space-6)}
+.vr-request__rows{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.6fr) minmax(0,1.3fr);gap:var(--space-4)}
+.vr-field{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-2);min-height:0;padding:var(--space-2);margin:calc(var(--space-2) * -1);border-top:none;border-radius:10px}
+.vr-field__label{font:var(--type-label);color:var(--text-tertiary)}
+.vr-field__value,.vr-field__value.is-mono{font:var(--weight-semibold) var(--text-xl)/1.15 var(--font-sans);font-variant-numeric:tabular-nums;letter-spacing:-.01em;color:var(--ink);flex-direction:column;align-items:flex-start;gap:2px}
+.vr-field__value.is-empty{color:var(--gray-300);font-weight:var(--weight-regular)}
+.vr-field__old{font-size:var(--text-xs)}
+.vr-field__mark{display:none}
+.vr-request__note{margin-top:auto;padding-top:var(--space-5);border-top:none}
+
+/* Booking: the one dark card. */
+.vr-receipt{background:var(--ink);color:var(--on-ink);border:none;border-radius:var(--radius-card)}
+.vr-receipt .vr-eyebrow{color:var(--on-ink-muted)}
+.vr-receipt__id{color:var(--on-ink);font-size:var(--text-3xl);font-weight:var(--weight-semibold)}
+.vr-receipt__rule{border-top-color:var(--on-ink-rule)}
+.vr-receipt__row{color:var(--on-ink)}
+.vr-receipt__row>span:first-child{color:var(--on-ink-muted)}
+.vr-receipt__stamp{border-color:transparent;background:color-mix(in oklch,var(--success-solid) 85%,white);color:var(--ink)}
+.kit-board .vr-receipt__foot{color:var(--on-ink-muted);border-top-color:var(--on-ink-rule)}
+.vr-receipt__note{background:var(--ink-soft);color:var(--on-ink)}
+.vr-receipt--empty{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:100%;padding:var(--space-6);background:var(--ink);border:none;color:var(--on-ink-muted);font:var(--weight-regular) var(--text-sm)/1.45 var(--font-sans);text-align:left}
+.vr-receipt--empty::before{content:"Your booking";margin-bottom:auto;font:var(--type-eyebrow);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--on-ink-muted)}
+.vr-receipt--empty span:first-child{font-size:var(--text-xl);font-weight:var(--weight-semibold);color:var(--on-ink)}
+
+/* Product cards: photo on top, name + one number below. */
+.vr-product{padding:var(--space-3);gap:var(--space-3)}
+.vr-product__media{display:grid;place-items:center;aspect-ratio:4/3;border-radius:var(--radius-media);background:var(--surface-media);color:var(--gray-500);overflow:hidden}
+.vr-product__media img{width:88%;height:88%;object-fit:contain}
+.vr-product__info{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-3);padding:0 var(--space-2)}
+.vr-product__text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vr-product__name{font-size:var(--text-md);font-weight:var(--weight-semibold);color:var(--ink)}
+.vr-product__count{color:var(--ink)}
+.vr-product__free{font-size:var(--text-2xl);font-weight:var(--weight-semibold)}
+.vr-product__status{padding:0 var(--space-2) var(--space-1)}
+.vr-product.is-selected{background:var(--surface-panel);box-shadow:inset 0 0 0 2px var(--ink)}
+.vr-product.is-selected .vr-product__media{background:var(--gray-100)}
+.vr-product.is-short{box-shadow:inset 0 0 0 2px var(--danger-solid)}
+.vr-product__status.is-success,.vr-product__status.is-accent{color:var(--ink)}
+
+/* Header controls: black pill for the one action. */
+.vr-header .vr-btn--secondary{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.vr-header .vr-btn--secondary:hover{background:var(--gray-800)}
+
+/* ---------- Desktop sizing: conversation ~38%, board takes the rest and always fits ---------- */
+@media (min-width:861px){
+  .kit-main{grid-template-columns:minmax(340px,38%) minmax(0,1fr)}
+  .kit-board{display:grid;grid-template-rows:auto minmax(0,1fr);gap:var(--gap);overflow:hidden}
+  .kit-board__inventory{min-height:0}
+  .kit-board__products{flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
+  .vr-product{min-height:0}
+  .vr-product__media{flex:1;min-height:72px;aspect-ratio:auto}
+}
+@media (min-width:861px) and (max-height:820px){
+  .vr-request,.vr-receipt,.vr-receipt--empty{padding:var(--space-5)}
+  .vr-request__head{margin-bottom:var(--space-4)}
+  .vr-receipt__rule{margin:var(--space-3) 0}
+  .vr-receipt__row{padding:3px 0}
+}
+
+/* ---------- Mobile: everything stacks ---------- */
+@media (max-width:860px){
+  .kit-main{padding:0 var(--space-3) var(--space-3)}
+  .kit-conv__voice{background:var(--surface-panel);border-radius:0 0 var(--radius-card) var(--radius-card)}
+  .kit-board{padding:0}
+  .kit-board__top{grid-template-columns:1fr}
+  .kit-board__products .vr-product{display:flex;flex-direction:row;align-items:center;padding:var(--space-3)}
+  .kit-board__products .vr-product__media{width:72px;height:72px;aspect-ratio:1;flex-shrink:0}
+  .kit-board__products .vr-product__info{flex:1}
+  .kit-board__products .vr-product__status{display:none}
+}
+
+/* Fixes after the first v2 screenshots. */
+@media (min-width:861px){
+  /* Board keeps natural heights; photo areas scale with the screen height instead of filling it. */
+  .kit-board{grid-template-rows:auto auto;align-content:start}
+  .kit-board__products{grid-template-rows:none}
+  .vr-product__media{flex:none;aspect-ratio:auto;height:clamp(84px,calc(100dvh - 500px),260px)}
+}
+.kit-board .vr-product.is-selected{background:var(--surface-panel)}
+.vr-receipt--empty{align-items:flex-start;text-align:left}
+/* Bottom edges align: the product row fills the remaining height, like the conversation panel. */
+@media (min-width:861px){
+  .kit-board{grid-template-rows:auto minmax(0,1fr);align-content:stretch}
+  .kit-board__products{grid-template-rows:minmax(0,1fr)}
+  .vr-product__media{flex:1;height:auto;min-height:84px}
+}
+/* Product status sits as a pill on the photo, so names and numbers line up across cards. */
+.vr-product{position:relative}
+.vr-product__status{position:absolute;top:calc(var(--space-3) + 10px);left:calc(var(--space-3) + 10px);padding:5px 10px;border-radius:999px;background:var(--surface-panel);box-shadow:0 1px 3px rgba(17,17,19,.12)}
+.vr-product__status.is-danger{color:var(--danger-fg)}

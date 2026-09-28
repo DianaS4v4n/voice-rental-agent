@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon } from '../core/Icon.jsx';
 
 const GLYPH = { camera: 'camera', tripod: 'tripod', microphone: 'microphone' };
 
-// One number carries the stock ("2 / 2"); the caption says what it means; the status line
-// appears only when there is something to say about this item.
-export function ProductCard({ name, kind = 'camera', total, free, requested = 0, className = '' }) {
+// A product photo on top (falls back to the line icon until a photo exists), then the name and
+// one stock number. The status line appears only when there is something to say about this item.
+export function ProductCard({ name, kind = 'camera', image, total, free, requested = 0, className = '' }) {
+  const [imageFailed, setImageFailed] = useState(false);
   const hasDates = free !== null && free !== undefined;
   const avail = hasDates ? free : total;
   const inRequest = requested > 0;
@@ -21,16 +22,22 @@ export function ProductCard({ name, kind = 'camera', total, free, requested = 0,
   const cls = ['vr-card', 'vr-product', inRequest && !short && 'is-selected', short && 'is-short', soldOut && 'is-soldout', className].filter(Boolean).join(' ');
   return (
     <article className={cls} aria-label={name}>
-      <div className="vr-product__top">
-        <div className="vr-product__glyph"><Icon name={GLYPH[kind] || 'camera'} size={22} /></div>
+      <div className="vr-product__media">
+        {image && !imageFailed ? (
+          <img src={image} alt="" onError={() => setImageFailed(true)} />
+        ) : (
+          <Icon name={GLYPH[kind] || 'camera'} size={36} strokeWidth={1.5} />
+        )}
+      </div>
+      <div className="vr-product__info">
+        <div className="vr-product__text">
+          <span className="vr-product__name">{name}</span>
+          <span className="vr-product__sub">{hasDates ? 'free' : 'in stock'}</span>
+        </div>
         <div className="vr-product__count" aria-label={`${avail} of ${total} ${hasDates ? 'free' : 'in stock'}`}>
           <span key={avail} className="vr-product__free">{avail}</span>
           <span className="vr-product__of">/ {total}</span>
         </div>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <span className="vr-product__name">{name}</span>
-        <span className="vr-product__sub">{hasDates ? 'free' : 'in stock'}</span>
       </div>
       {status && (
         <div className={`vr-product__status is-${status.tone}`}>
