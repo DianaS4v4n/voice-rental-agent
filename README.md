@@ -1,5 +1,7 @@
 # Rental Desk — voice equipment booking agent
 
+**Live demo:** https://voice-rental-agent.onrender.com (free tier — the first visit may take ~50 s to wake up).
+
 A browser voice agent for a small equipment rental desk. You say what you need and for which days,
 change your mind, and the agent checks the real test inventory and saves **exactly one** booking —
 only after you explicitly say yes to its read-back.

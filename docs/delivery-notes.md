@@ -2,7 +2,7 @@
 
 Voice equipment booking agent — Diana, Product Builder test assignment, 2026-09-25 → 2026-09-30.
 
-- **Demo:** _link added after deployment_
+- **Demo:** https://voice-rental-agent.onrender.com (Render free tier: the first visit after 15 idle minutes takes up to ~50 s to wake the server)
 - **Repository:** this repo; setup in [README.md](../README.md)
 - **Video walkthrough:** _link added after recording_
 
@@ -70,6 +70,8 @@ metric live from the microphone level and shows it in the reviewer drawer.
 | **E — A + "Let me check." before tool calls** | T1 T2 T4 | **median 2092** | pass |
 | **Final (E) — full run** | T1–T9 | **median 1657, p90 2391, max 2445** (19 turns) | 8/9 (T9 partial) |
 | Final — useful answer | T1–T9 | **median 2287, p90 3837** | |
+
+**Deployed demo** (Render, US region; tests run from Europe): T1 and T3 pass; first audio median 2119 ms, useful answer median 3066 ms over 4 turns — the extra network hop adds ~0.4–0.8 s ([evidence](evidence/voice-tests-2026-09-28-render/)).
 
 Time to a useful result for a whole booking: the booking is saved **25–27 s** after the conversation starts
 (including the 5 s greeting) in T1, T2 and T4.
