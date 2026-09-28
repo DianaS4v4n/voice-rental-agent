@@ -1,6 +1,6 @@
 # Delivery notes
 
-Voice equipment booking agent — Diana, Product Builder test assignment, 2026-09-25 → 2026-09-30.
+Voice equipment booking agent — Diana, Product Builder test assignment, 2026-09-25 → 2026-09-28.
 
 - **Demo:** https://voice-rental-agent.onrender.com (Render free tier: the first visit after 15 idle minutes takes up to ~50 s to wake the server)
 - **Repository:** this repo; setup in [README.md](../README.md)
