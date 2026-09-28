@@ -60,6 +60,10 @@ export const FUNCTIONS = [
   },
 ];
 
+// Say a two-to-four word acknowledgement before a tool call, so the first audio doesn't wait for the tool
+// round-trip. Measured separately from the useful answer (see tests/voice/run.mjs).
+const FILLER = process.env.FILLER === '1';
+
 function buildPrompt(today: string): string {
   const weekday = new Date(`${today}T00:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
   return `You are the voice agent of a small equipment rental desk. You speak English. Today is ${weekday}, ${today}.
@@ -79,7 +83,7 @@ How to work:
 - If the user changes anything after your read-back, call update_request again and read back the new request. Never book an old version.
 - After a booking, give the booking ID. If the user confirms again, say it's already booked with the same ID; don't book twice.
 - Dates are in 2026 unless the user says otherwise. Don't book dates in the past.
-
+${FILLER ? '- When you are about to call update_request or confirm_booking, first say a very short acknowledgement in the same turn (two to four words, e.g. "Let me check." or "One moment."), then call the function.\n' : ''}
 Style: calm counter clerk. One or two short sentences per turn. No lists, no emoji, no markdown. Spell dates out for speech.`;
 }
 

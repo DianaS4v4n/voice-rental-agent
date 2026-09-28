@@ -11,6 +11,8 @@ import { runTool } from './tools.ts';
 import { localToday } from './dates.ts';
 
 const LOG_DIR = 'logs';
+// A public demo pays per connected minute; end forgotten sessions.
+const MAX_SESSION_MS = Number(process.env.MAX_SESSION_SECONDS ?? 300) * 1000;
 
 // Deepgram events the browser needs to drive the UI.
 const FORWARDED = new Set([
@@ -31,6 +33,11 @@ export function runAgentSession(browser: WebSocket, service: BookingService, api
   const log: Array<Record<string, unknown>> = [];
   const record = (entry: Record<string, unknown>) => log.push({ t: Date.now() - startedAt.getTime(), ...entry });
   const dbBefore = service.snapshot();
+  const sessionTimer = setTimeout(() => {
+    record({ type: 'session_time_limit' });
+    toBrowser({ type: 'Closed', code: 4000, reason: 'Session time limit reached' });
+    browser.close(1000, 'Session time limit reached');
+  }, MAX_SESSION_MS);
   let settingsApplied = false;
 
   const toBrowser = (message: Record<string, unknown>) => {
@@ -121,6 +128,7 @@ export function runAgentSession(browser: WebSocket, service: BookingService, api
   });
 
   browser.on('close', () => {
+    clearTimeout(sessionTimer);
     if (deepgram.readyState === WebSocket.OPEN || deepgram.readyState === WebSocket.CONNECTING) deepgram.close();
     saveLog();
   });

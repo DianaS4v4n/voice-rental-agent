@@ -87,6 +87,8 @@ async function runCase(testCase) {
   const play = { end: 0, playing: false, audioDone: false, dropping: false, replyStartedAt: null };
   // Latency: end of the customer's speech → first agent audio of the reply.
   const turn = { speechEndedAt: null, waitingFirstAudio: false };
+  // Useful answer: end of speech → first audio of the agent's text that follows the turn's tool result
+  // (or simply the first audio when no tool ran). A "let me check" filler counts for latency, not here.
   let lastActivity = 0;
 
   const log = (e) => events.push({ t: Math.round(now()), ...e });
@@ -102,7 +104,7 @@ async function runCase(testCase) {
         play.playing = true;
         play.replyStartedAt = start;
       }
-      agentAudio.push({ at: start, pcm });
+      agentAudio.push({ at: start, recvAt: now(), pcm });
       if (turn.waitingFirstAudio && turn.speechEndedAt != null) {
         latencies.push({ turn: latencies.length + 1, ms: Math.round(start - turn.speechEndedAt) });
         turn.waitingFirstAudio = false;
@@ -117,6 +119,7 @@ async function runCase(testCase) {
         break;
       case 'state':
         lastState = m;
+        log({ type: 'state_update' });
         if (m.event) log({ type: 'board', event: m.event.kind, bookingId: m.event.bookingId, code: m.event.code });
         break;
       case 'ConversationText':
@@ -126,6 +129,7 @@ async function runCase(testCase) {
           play.dropping = false;
           play.audioDone = false;
           turn.waitingFirstAudio = true;
+          log({ type: 'speech_end', at: turn.speechEndedAt });
         }
         break;
       case 'UserStartedSpeaking':
@@ -158,7 +162,8 @@ async function runCase(testCase) {
       if (ready && ws.readyState === WebSocket.OPEN) {
         const chunk = mic.shift() ?? new Int16Array(CHUNK);
         ws.send(chunk.buffer);
-        const at = now();
+        // Recorded at its ideal slot (not the jittery send time) so the WAV has no clicks between chunks.
+        const at = micStart - t0 + (micTick - 1) * CHUNK_MS;
         if (chunk.speech) {
           userAudio.push({ at, pcm: chunk });
           turn.speechEndedAt = at + CHUNK_MS;
@@ -228,6 +233,7 @@ async function runCase(testCase) {
   ws.close(1000);
   await micLoop;
   const after = await (await fetch(`${APP_URL}/api/state`)).json();
+  const useful = usefulAnswers(events, agentAudio);
 
   return { before, after, events, transcript, latencies, userAudio, agentAudio, finalRequest: lastState?.request ?? null, durationSeconds };
 }
@@ -237,6 +243,22 @@ async function runCase(testCase) {
 function prepare(testCase) {
   const steps = testCase.steps.map((s, i) => ({ ...s, noWait: Boolean(testCase.steps[i + 1]?.interrupt) }));
   return { ...testCase, steps };
+}
+
+// Useful answer per turn: end of the customer's speech → first agent audio that arrives after the
+// agent's first text following the turn's last tool result (or its first text if no tool ran).
+// A 'let me check' filler therefore counts for first-audio latency but not for the useful answer.
+function usefulAnswers(events, agentAudio) {
+  const ends = events.filter((e) => e.type === 'speech_end');
+  return ends.map((end, i) => {
+    const from = end.t;
+    const to = ends[i + 1]?.t ?? Infinity;
+    const inTurn = events.filter((e) => e.t >= from && e.t < to);
+    const lastTool = inTurn.filter((e) => e.type === 'state_update').at(-1);
+    const text = inTurn.find((e) => e.type === 'ConversationText' && e.role === 'assistant' && (!lastTool || e.t >= lastTool.t));
+    const audio = text && agentAudio.find((a) => a.recvAt >= text.t && a.recvAt < to);
+    return audio ? { turn: i + 1, ms: Math.round(audio.at - end.at) } : null;
+  }).filter(Boolean);
 }
 
 // ---------- Checks ----------
@@ -322,6 +344,8 @@ for (const testCase of cases) {
 }
 
 // Summary report
+const allUseful = summary.flatMap((s) => s.result.useful.map((l) => l.ms)).sort((a, b) => a - b);
+const stats = (xs) => (xs.length ? `${xs.length} turns · median ${xs[Math.floor(xs.length / 2)]} ms · p90 ${xs[Math.min(xs.length - 1, Math.floor(0.9 * xs.length))]} ms · max ${xs.at(-1)} ms` : 'none');
 const allLatencies = summary.flatMap((s) => s.result.latencies.map((l) => l.ms)).sort((a, b) => a - b);
 const pct = (p) => allLatencies[Math.min(allLatencies.length - 1, Math.floor((p / 100) * allLatencies.length))];
 const totalMinutes = summary.reduce((sum, s) => sum + s.result.durationSeconds, 0) / 60;
@@ -330,13 +354,15 @@ const lines = [
   '',
   `App: ${APP_URL} · customer voice: Deepgram ${VOICE} (synthetic) · ${summary.filter((s) => s.pass).length}/${summary.length} passed`,
   '',
-  '| Test | Result | Checks | Turns · latency (ms) | Duration |',
+  '| Test | Result | Checks | First audio / useful answer per turn (ms) | Duration |',
   '|---|---|---|---|---|',
-  ...summary.map((s) => `| ${s.testCase.id} ${s.testCase.title} | ${s.pass ? 'PASS' : '**FAIL**'} | ${s.checks.map((c) => `${c.pass ? '✓' : '✗'} ${c.name} → ${c.actual}`).join('<br>')} | ${s.result.latencies.map((l) => l.ms).join(', ') || '—'} | ${s.result.durationSeconds.toFixed(0)} s |`),
+  ...summary.map((s) => `| ${s.testCase.id} ${s.testCase.title} | ${s.pass ? 'PASS' : '**FAIL**'} | ${s.checks.map((c) => `${c.pass ? '✓' : '✗'} ${c.name} → ${c.actual}`).join('<br>')} | ${s.result.latencies.map((l) => l.ms).join(', ') || '—'}<br>useful: ${s.result.useful.map((l) => l.ms).join(', ') || '—'} | ${s.result.durationSeconds.toFixed(0)} s |`),
   '',
   '## Latency (end of customer speech → first agent audio received)',
   '',
   allLatencies.length ? `${allLatencies.length} turns · median ${pct(50)} ms · p90 ${pct(90)} ms · max ${allLatencies.at(-1)} ms` : 'No turns measured.',
+  '',
+  `**Useful answer** (first audio of the reply that carries the tool result): ${stats(allUseful)}`,
   '',
   'Measured at the WebSocket client, so it excludes browser playback buffering (the browser adds its output latency, typically 10–50 ms).',
   '',

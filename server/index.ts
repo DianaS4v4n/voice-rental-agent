@@ -8,7 +8,7 @@ import { openBookingService } from './booking.ts';
 import { runAgentSession } from './agent-session.ts';
 
 const PORT = Number(process.env.PORT ?? 3000);
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production' || process.argv.includes('--prod');
 const apiKey = process.env.DEEPGRAM_API_KEY;
 if (!apiKey) {
   console.error('DEEPGRAM_API_KEY is missing. Put it in .env (see .env.example).');

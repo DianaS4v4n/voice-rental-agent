@@ -1,0 +1,12 @@
+# Render Blueprint: one Node web service (HTTP + WebSocket on the same port).
+services:
+  - type: web
+    name: rental-desk-voice-agent
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/state
+    envVars:
+      - key: DEEPGRAM_API_KEY
+        sync: false   # set in the Render dashboard, never committed

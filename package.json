@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node --env-file-if-exists=.env --no-warnings=ExperimentalWarning server/index.ts",
     "build": "vite build",
-    "start": "NODE_ENV=production node --env-file-if-exists=.env --no-warnings=ExperimentalWarning server/index.ts",
+    "start": "node --env-file-if-exists=.env --no-warnings=ExperimentalWarning server/index.ts --prod",
     "test": "node --no-warnings=ExperimentalWarning --test \"server/**/*.test.ts\"",
     "test:voice": "node --env-file-if-exists=.env tests/voice/run.mjs"
   },
